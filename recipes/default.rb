@@ -18,7 +18,17 @@ bash "Adding 10gen mongo source"  do
   EOC
 end
 
-package 'mongodb-10gen'
+bash "installing and pinning mongodb 2.6.4" do
+  user 'root'
+  code <<-EOC
+    apt-get install -y mongodb-org=2.6.4 mongodb-org-server=2.6.4 mongodb-org-shell=2.6.4 mongodb-org-mongos=2.6.4 mongodb-org-tools=2.6.4.
+    echo "mongodb-org hold" | dpkg --set-selections
+    echo "mongodb-org-server hold" | dpkg --set-selections
+    echo "mongodb-org-shell hold" | dpkg --set-selections
+    echo "mongodb-org-mongos hold" | dpkg --set-selections
+    echo "mongodb-org-tools hold" | dpkg --set-selections
+  EOC
+end
 
 template '/etc/init/mongodb.conf' do
   owner 'root'
