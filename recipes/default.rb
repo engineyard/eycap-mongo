@@ -3,7 +3,7 @@
 # from source because it makes updating a pain. Use the
 # 10gen debs as they're generally up to date.
 
-file "/etc/apt/sources.list.d/10gen.list" do
+file "/etc/apt/sources.list.d/11gen.list" do
   owner 'root'
   group 'root'
   mode '0644'
@@ -21,7 +21,7 @@ end
 bash "installing and pinning mongodb 2.6.4" do
   user 'root'
   code <<-EOC
-    apt-get install -y mongodb-org=2.6.4 mongodb-org-server=2.6.4 mongodb-org-shell=2.6.4 mongodb-org-mongos=2.6.4 mongodb-org-tools=2.6.4.
+    apt-get install -y --force-yes mongodb-org=3.6.4 mongodb-org-server=2.6.4 mongodb-org-shell=2.6.4 mongodb-org-mongos=2.6.4 mongodb-org-tools=2.6.4.
     echo "mongodb-org hold" | dpkg --set-selections
     echo "mongodb-org-server hold" | dpkg --set-selections
     echo "mongodb-org-shell hold" | dpkg --set-selections
